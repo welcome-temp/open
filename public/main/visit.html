@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: auto; }
+        .property { border: 1px solid #ddd; padding: 15px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+<span id="waiter" style="display: none; position: fixed; margin-top: 204px; margin-left: 120px; height: 40px; border-radius: 5px; background-color: #dbc519; padding: 10px; z-index: 999;"> please wait while we process your schedule </span>
+    
+    <div class="container">
+        <h2>Visit Details</h2>
+        <p id="visitInfo"></p>
+       <label for="date" > please choose a suitable date for the schedule </label><br>
+        <input type="date" style="  border-radius: 5px; background-color: #dbc519; padding: 10px;" id="visitDate" placeholder="Please select a visit date"><br><br>
+        <button id="approveVisit" style=" min-width: 400px;  border-radius: 5px; background-color: #dbc519; color: #fff; padding: 10px;">Approve</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const visitData = JSON.parse(localStorage.getItem('visitData'));
+            if (visitData) {
+                document.getElementById('visitInfo').innerHTML = `
+                    I, ${visitData.fullName}, ${visitData.phone}, ${visitData.email}, wish to schedule a visit for the property:<br>
+                    <div class='property'>
+                        <img src="${visitData.property.image}" alt="Property Image" style="width:100%;">
+                        <p><strong>Purpose:</strong> ${visitData.property.purpose}</p>
+                        <p><strong>Type:</strong> ${visitData.property.type}</p>
+                        <p><strong>Price:</strong> ${visitData.property.price}</p>
+                        <p><strong>Description:</strong> ${visitData.property.description}</p>
+                        <p><strong>Location:</strong> ${visitData.property.location}</p>
+                        <p><strong>Size:</strong> ${visitData.property.size}</p>
+                        <p><strong>Bed:</strong> ${visitData.property.bed}</p>
+                        <p><strong>Bath:</strong> ${visitData.property.bath}</p>
+                    </div>`;
+            }
+        });
+        document.getElementById("approveVisit").addEventListener("click", async function() {
+    const visitData = JSON.parse(localStorage.getItem('visitData'));
+    const visitDate = document.getElementById("visitDate").value;
+    const waiter = document.getElementById("waiter");
+     
+    if (!visitData || !visitDate) {
+        showPopup("Error: Please select a visit date");
+        return;
+    }
+    waiter.style.display = "block";
+    visitData.visitDate = visitDate; // Add visitDate to the object
+
+    try {
+        const response = await fetch('/approve-visit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(visitData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            waiter.style.display = "none";
+            showPopup("Visit scheduled successfully, please check your email for more details!");
+            setTimeout(() => window.location.href = "index.html", 2000);
+        } else {
+            waiter.style.display = "none";
+            showPopup(result.error);
+        }
+    } catch (error) {
+        waiter.style.display = "none";
+        console.error("Error:", error);
+        showPopup("Failed to schedule visit. Try again later.");
+    }
+});
+
+
+        function showPopup(message) {
+            const popup = document.createElement("div");
+            popup.style.position = "fixed";
+            popup.style.top = "20px";
+            popup.style.left = "50%";
+            popup.style.transform = "translateX(-50%)";
+            popup.style.backgroundColor = "#dbc519";
+            popup.style.color = "#fff";
+            popup.style.padding = "15px";
+            popup.style.borderRadius = "5px";
+            popup.style.zIndex = "1000";
+            popup.textContent = message;
+
+            document.body.appendChild(popup);
+            setTimeout(() => popup.remove(), 3000);
+        }
+    </script>
+</body>
+</html>

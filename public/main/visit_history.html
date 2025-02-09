@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit History</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+        .visit-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .visit-card img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .timestamp {
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2 class="text-center">Visit History</h2>
+        <div id="visitHistory"></div>
+    </div>
+
+    <script>
+        async function fetchVisitHistory() {
+            try {
+                const response = await fetch('/visit-history');
+                const visits = await response.json();
+
+                if (response.ok) {
+                    const visitHistoryContainer = document.getElementById("visitHistory");
+                    visitHistoryContainer.innerHTML = "";
+
+                    // Show new visits first (latest on top)
+                    visits.reverse().forEach(visit => {
+                        const visitElement = document.createElement("div");
+                        visitElement.classList.add("visit-card");
+
+                        visitElement.innerHTML = `
+                            <p class="timestamp"><strong>Visit Scheduled On:</strong> ${visit.timestamp}</p>
+                            <p><strong>Visitor:</strong> ${visit.full_name} - ${visit.phone} - ${visit.email}</p>
+                            <p><strong>Visit Date:</strong> ${visit.visit_date}</p>
+                            <div class="property">
+                                <img src="${JSON.parse(visit.property_details).image}" alt="Property Image">
+                                <p><strong>Purpose:</strong> ${JSON.parse(visit.property_details).purpose}</p>
+                                <p><strong>Type:</strong> ${JSON.parse(visit.property_details).type}</p>
+                                <p><strong>Price:</strong> ${JSON.parse(visit.property_details).price}</p>
+                                <p><strong>Description:</strong> ${JSON.parse(visit.property_details).description}</p>
+                                <p><strong>Location:</strong> ${JSON.parse(visit.property_details).location}</p>
+                                <p><strong>Size:</strong> ${JSON.parse(visit.property_details).size}</p>
+                                <p><strong>Bed:</strong> ${JSON.parse(visit.property_details).bed}</p>
+                                <p><strong>Bath:</strong> ${JSON.parse(visit.property_details).bath}</p>
+                            </div>
+                        `;
+                        visitHistoryContainer.appendChild(visitElement);
+                    });
+                } else {
+                    console.error("Failed to load visit history.");
+                }
+            } catch (error) {
+                console.error("Error fetching visit history:", error);
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", fetchVisitHistory);
+    </script>
+
+</body>
+</html>

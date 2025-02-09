@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Open-nest RPA</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="real estate agency" name="keywords">
+    <meta content="eme-nest is a real estate agency company that specialize, in buying and selling of properties" name="description">
+
+    <!-- Favicon -->
+    <link href="../img/open.jpeg" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="../lib/animate/animate.min.css" rel="stylesheet">
+    <link href="../lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="../css/style.css" rel="stylesheet">
+    <link href="stuless.css" rel="stylesheet">
+
+</head>
+
+<body>
+   <!-- Spinner Start 
+    <div class="container-xxl bg-white p-0">
+     
+        <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        Spinner End -->
+
+
+       
+        <!-- Navbar Start -->
+        <div class="container-fluid nav-bar bg-transparent">
+            <nav class="navbar navbar-expand-lg navbar-light py-0 px-4" style="background-color:  #dbc519;">
+                <a href="index.html" class="navbar-brand d-flex align-items-center text-center">
+                    <div class="icon p-2 me-2">
+                        <img class="img-fluid" src="../img/open.jpeg" alt="Icon" style="width: 30px; height: 30px;">
+                    </div>
+                    <h1 class="m-0 "  style="color:  #fff;">Open-nest</h1>
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto">
+                        <a href="index.html" class="nav-item nav-link active">Home</a>
+                        <a href="../about.html" class="nav-item nav-link">About</a>
+                        <a href="../contact.html" class="nav-item nav-link">Contact</a>
+                        <a id="search_btn" class="nav-item nav-link" style=" cursor: pointer;">search</a>
+                    </div>
+                    <a class="btn px-3 d-none d-lg-flex" href="#tab-1" style="background-color:  #8d7f13; color:  #fff;">Schedule a visit</a>
+               
+                </div>
+            </nav>
+        </div>
+        <!-- Navbar End -->
+
+       <!-- Search Start -->
+<div class="container-fluid bg-dark mb-5 wow fadeIn" id="search_bar" data-wow-delay="0.1s" style="display: none; cursor: pointer; padding: 35px;">
+    <div class="container">
+        <div class="row g-2">
+            <div class="col-md-10">
+                <div class="row g-2">
+                    <div class="col-md-4">
+                        <input type="number" id="searchPrice" class="form-control border-0 py-3" placeholder="Enter the property price">
+                    </div>
+                    <div class="col-md-4">
+                        <select id="searchType" class="form-select border-0 py-3">
+                            <option value="">Property Type</option>
+                            <option value="duplex">Duplex</option>
+                            <option value="story building">Story Building</option>
+                            <option value="bungalow">Bungalow</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select id="searchLocation" class="form-select border-0 py-3">
+                            <option value="">Location</option>
+                            <option value="Lagos">Lagos</option>
+                            <option value="Ebonyi">Ebonyi</option>
+                            <option value="Abia">Abia</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-secondary border-0 w-100 py-3" onclick="filterProperties()">Search</button>
+                <!-- 
+                <span id="resulter"> sorry no result found, please check available properties below</span>
+            -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search End -->
+     
+        
+
+        <!-- curosel start -->
+        <div class="container mt-5">
+            <h1>Hottest deals</h1>
+               <div class="carousel-container"> 
+           <div class="carousel"> 
+            <div class="slides"> 
+             <div class="slide"> <button onclick="showPopup(1)"><img class="curo" src="../img/second.jpg" alt="Slide 1"></button> 
+             </div> 
+             <div class="slide"> <button onclick="showPopup(2)"><img class="curo" src="../img/secondd.jpg" alt="Slide 2"></button> 
+             </div> 
+             <div class="slide"> <button onclick="showPopup(3)"><img class="curo" src="../img/good.jpg" alt="Slide 3"></button> 
+             </div> <!-- Cloned slide added dynamically --> 
+            </div> 
+           </div> 
+           <div class="dots"> <span class="dot" onclick="goToSlide(0)"></span> <span class="dot" onclick="goToSlide(1)"></span> <span class="dot" onclick="goToSlide(2)"></span> 
+           </div> 
+          </div>
+          <!-- Pop-up Overlay --> 
+          <div class="popup-overlay" id="popupOverlay">  
+            <div class="popup-content" id="popupContent">
+                <h2></h2> <!-- Add this missing h2 element -->
+                <p></p> 
+            <p></p> <button onclick="window.location.href='../contact.html'">visit</button>
+        
+           </div> 
+          </div> 
+              <!-- curosel end -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="propertyModalLabel">Property Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img id="modalImage" class="img-fluid w-100 mb-3" src="" alt="Property Image">
+                <h5 id="modalPrice" style="color: #dbc519;"></h5>
+                <p id="modalDescription"></p>
+                <p><strong>Location:</strong> <span id="modalLocation"></span></p>
+                <p><strong>Size:</strong> <span id="modalSize"></span></p>
+                <p><strong>Bedrooms:</strong> <span id="modalBed"></span></p>
+                <p><strong>Bathrooms:</strong> <span id="modalBath"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Popup Form -->
+<div id="visitFormPopup" class="popup" style=" min-width: 300px;  border-radius: 20px;  display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 20px; box-shadow: 0px 0px 10px rgba(0,0,0,0.2);  z-index: 999;">
+    <h4>Schedule a Visit</h4>
+    <input type="text" id="fullName" placeholder="Please enter your full name" style=" min-width: 300px;  border-radius: 5px; " required><br><br>
+    <input type="number" id="phone" placeholder="Please enter a valid phone number" style=" min-width: 300px;  border-radius: 5px; " required><br><br>
+    <input type="email" id="email" placeholder="Please enter a valid email" style=" min-width: 300px;  border-radius: 5px; " required><br><br>
+    <button onclick="submitVisitForm()" style=" min-width: 300px;  border-radius: 5px; background-color: #dbc519; padding: 10px;">Submit</button>
+    <button onclick="closeFormPopup()">Close</button>
+</div>
+
+
+
+        <!-- Property List Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-0 gx-5 align-items-end">
+                    <div class="col-lg-6">
+                        <div class="text-start mx-auto mb-5 wow slideInLeft" data-wow-delay="0.1s">
+                            <h1 class="mb-3" id="prop">Properties available</h1>
+                            
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                        <ul class="nav nav-pills d-inline-flex justify-content-end mb-5">
+                            <li class="nav-item me-2">
+                                <a class="btn btn-outline-dark active" data-bs-toggle="pill" href="#tab-1">Featured</a>
+                            </li>
+                            <li class="nav-item me-2">
+                                <a class="btn btn-outline-dark" data-bs-toggle="pill" href="#tab-2">For Sell</a>
+                            </li>
+                            <li class="nav-item me-0">
+                                <a class="btn btn-outline-dark" data-bs-toggle="pill" href="#tab-3">For Rent</a>
+                            </li>
+                           <!-- <li class="nav-item me-0">
+                                <a class="btn btn-outline-dark" data-bs-toggle="pill" href="#tab-4">Search</a>
+                            </li> -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="tab-content" >
+                    <div id="tab-1" class="tab-pane fade show p-0 active">
+                        <div class="row g-4">
+                            <div id="product-container" class="row">
+                                <!-- Properties will be dynamically loaded here -->
+                              </div>
+                        </div>
+                    </div>
+                    
+                     <br>
+                    <div id="tab-2" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                             
+                            <div id="salesContainer" class="row">
+                                <!-- Properties will be dynamically loaded here -->
+                              </div>
+                        </div>
+                    </div>
+
+                    <br>
+                    <div id="tab-3" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+
+                            <div id="rentContainer" class="row">
+                                <!-- Properties will be dynamically loaded here -->
+                              </div>
+                            
+                        </div>
+                    </div>
+
+                     <br>
+                    <div id="tab-4" class="tab-pane fade show p-0">
+                        <div class="row g-4">
+                         
+                   
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Property List End -->
+
+
+
+
+        
+        
+       <!-- Footer Start -->
+       <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+        <div class="container py-5">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Contact Us Today</h5>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>4 azugwu road off cas gate, waterworks abakaliki, ebonyi state nigeria</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+234 8102410671</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>opennesthomes@gmail.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" target="_blank" rel="noopener noreferrer" href="https://www.x.com"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" target="_blank" rel="noopener noreferrer" href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" target="_blank" rel="noopener noreferrer" href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Quick Links</h5>
+                    <a class="btn btn-link text-white-50" href="../about.html">About Us</a>
+                    <a class="btn btn-link text-white-50" href="../contact.html">Contact Us</a>
+                    <a class="btn btn-link text-white-50" href="../404.html#service">Our Services</a>
+                    <a class="btn btn-link text-white-50" href="../404.html#privacy">Privacy Policy</a>
+                    <a class="btn btn-link text-white-50" href="../404.html#terms">Terms & Condition</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">latest properties </h5>
+                    <div class="row g-2 pt-2">
+                        <div class="col-4">
+                            <img class="img-fluid rounded bg-light p-1" src="../img/tird.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid rounded bg-light p-1" src="../img/second.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid rounded bg-light p-1" src="../img/secondd.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid rounded bg-light p-1" src="../img/lucc.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid rounded bg-light p-1" src="../img/lux.jpg" alt="">
+                        </div>
+                        <div class="col-4">
+                            <img class="img-fluid rounded bg-light p-1" src="../img/luxc.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="text-white mb-4">Newsletter</h5>
+                    <p>Subscribe to our newsletter so as to  keep you updated, in an latest news or features</p>
+                    <div class="position-relative mx-auto" style="max-width: 400px;">
+                        <form id="news_form" method="post">
+                        <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text" id="email" placeholder="Your email">
+                        <button type="submit" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">Subscribe</button>
+                    </form>
+                    <script>
+                        
+document.getElementById('news_form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+
+    const errorContainer = document.getElementById('errorContainer');
+    const submitButton = this.querySelector('button[type="submit"]');
+    errorContainer.textContent = ''; // Clear previous errors
+    submitButton.disabled = true; // Disable button to prevent multiple clicks
+    submitButton.textContent = 'Submitting...';
+
+    try {
+        const response = await fetch('/subscribe', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+
+        if (!response.ok) {
+            throw new Error('Server error, please check your internet connection and try again');
+        }
+
+        const result = await response.json();
+        alert('Thank you for subscribing to our newsletter, sure we will keep you posted');
+        this.reset();
+    } catch (error) {
+        console.error('Error:', error);
+        errorContainer.textContent = error.message || 'Failed to connect to the server. Please try again.';
+    } finally {
+        submitButton.disabled = false; // Re-enable button
+        submitButton.textContent = 'Submit';
+    }
+});
+
+                    </script>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="copyright">
+                <div class="row">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        &copy; <a class="border-bottom" target="_blank" href="https://welcome-template.com">@open-nest</a>, All Right Reserved. 
+                        
+                        <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                        Designed By <a class="border-bottom" target="_blank" href="https://welcome-template.com">welcome-template</a>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <div class="footer-menu">
+                            <a href="../index.html">Home</a>
+                            <a href="../404.html#cookies">Cookies</a>
+                            <a href="../404.html#help">Help</a>
+                            <a href="../404.html#fqa">FQAs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer End -->
+
+
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-lg btn-lg-square back-to-top" style="background-color:  #dbc519;"><i class="bi bi-arrow-up"></i></a>
+</div>
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="../lib/wow/wow.min.js"></script>
+<script src="../lib/easing/easing.min.js"></script>
+<script src="../lib/waypoints/waypoints.min.js"></script>
+<script src="../lib/owlcarousel/owl.carousel.min.js"></script>
+
+<!-- Template Javascript -->
+<script src="../js/main.js"></script>
+<script src="script.js"></script>
+</body>
+
+</html>
